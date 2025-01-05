@@ -189,8 +189,6 @@ openFile(fileUrl) {
       isTopBar: true,
       // 顶部状态栏自定义菜单功能按钮
       menuItems: ['下载', '分享'],
-      // 跳转页码
-      targetPage: 5,
     },
     res => {
       this.printInfo('打开在线文档事件结果：', res);
@@ -264,29 +262,72 @@ sealOfficeOnlineModule.gotoPage(5)
 
 新建组件：seal-officeonline-component.nvue
 
+<span style="color:red">**温馨提示：添加`@callback="handleCallback"`可以获取回调结果，参考`第七章节回调结果`**</span>
+
 ```vue
 <template>
-	<div><Seal-OfficeOnline :options="options" style="width:600rpx;height:800rpx;border: 1px solid red;"></Seal-OfficeOnline></div>
+	<div>
+		<!-- 预览区域 -->
+		<Seal-OfficeOnline :options="options" @callback="handleCallback"
+			style="width:600rpx;height:800rpx;border: 1px solid red;"></Seal-OfficeOnline>
+		<!-- 操作区域 -->
+		<div style="margin: 20px 10px 0 10px;">
+			<button type="primary" @click="handleRandomChangeDoc">随机切换</button>
+		</div>
+	</div>
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			options: {}
+	const modal = uni.requireNativePlugin('modal');
+	export default {
+		data() {
+			return {
+				options: {},
+				docList: [
+					'http://silianpan.cn/upload/2022/01/01/2.pdf',
+					'http://silianpan.cn/upload/2022/01/01/1.txt',
+					'http://silianpan.cn/upload/2022/01/01/2.txt',
+					'http://silianpan.cn/upload/2022/01/01/1.docx',
+					'http://silianpan.cn/upload/2022/01/01/2.docx',
+					'http://silianpan.cn/upload/2022/01/01/1.xlsx',
+					'http://silianpan.cn/upload/2022/01/01/1.pptx',
+					'http://silianpan.cn/upload/2022/01/01/1.csv',
+					'https://static.gongkaoleida.com/2021/file/download/2021湖南省公务员考试《报考指导手册》.pdf',
+					'https://static.gongkaoleida.com/2021/file/download/' + encodeURIComponent('2021湖南省公务员考试《报考指导手册》') + '.pdf',
+				],
+			}
+		},
+		onLoad(params) {
+			console.log('params', params)
+			this.options = {
+				// 文档预览，传递url
+				url: params.url,
+				waterMarkText: '你好，世界\n准备好了吗？时刻准备着',
+				// 禁止截屏
+				canScreenshot: false,
+			}
+		},
+		methods: {
+			// 生成0~max之间的随机整数
+			getRandomInt(max) {
+			  return Math.floor(Math.random() * max);
+			},
+			handleCallback(e) {
+				console.log('callback: ', e.detail)
+				modal.toast({
+					message: JSON.stringify(e.detail),
+					duration: 2,
+				});
+			},
+			// 随机切换文档
+			handleRandomChangeDoc() {
+				this.options = {
+					...this.options,
+					url: this.docList[this.getRandomInt(this.docList.length)]
+				};
+			}
 		}
-	},
-	onLoad(params) {
-		console.log('params', params)
-		this.options = {
-			// 文档预览，传递url
-			url: params.url,
-			waterMarkText: '你好，世界\n准备好了吗？时刻准备着',
-      // 跳转页码
-      targetPage: 5,
-		}
-	}
-};
+	};
 </script>
 ```
 

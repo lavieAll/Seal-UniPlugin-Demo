@@ -1,6 +1,13 @@
 <template>
-	<div><Seal-OfficeOnline :options="options" @callback="handleCallback"
-			style="width:600rpx;height:800rpx;border: 1px solid red;"></Seal-OfficeOnline></div>
+	<div>
+		<!-- 预览区域 -->
+		<Seal-OfficeOnline :options="options" @callback="handleCallback"
+			style="width:600rpx;height:800rpx;border: 1px solid red;"></Seal-OfficeOnline>
+		<!-- 操作区域 -->
+		<div style="margin: 20px 10px 0 10px;">
+			<button type="primary" @click="handleRandomChangeDoc">随机切换</button>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -8,7 +15,19 @@
 	export default {
 		data() {
 			return {
-				options: {}
+				options: {},
+				docList: [
+					'http://silianpan.cn/upload/2022/01/01/2.pdf',
+					'http://silianpan.cn/upload/2022/01/01/1.txt',
+					'http://silianpan.cn/upload/2022/01/01/2.txt',
+					'http://silianpan.cn/upload/2022/01/01/1.docx',
+					'http://silianpan.cn/upload/2022/01/01/2.docx',
+					'http://silianpan.cn/upload/2022/01/01/1.xlsx',
+					'http://silianpan.cn/upload/2022/01/01/1.pptx',
+					'http://silianpan.cn/upload/2022/01/01/1.csv',
+					'https://static.gongkaoleida.com/2021/file/download/2021湖南省公务员考试《报考指导手册》.pdf',
+					'https://static.gongkaoleida.com/2021/file/download/' + encodeURIComponent('2021湖南省公务员考试《报考指导手册》') + '.pdf',
+				],
 			}
 		},
 		onLoad(params) {
@@ -24,12 +43,23 @@
 			}
 		},
 		methods: {
+			// 生成0~max之间的随机整数
+			getRandomInt(max) {
+			  return Math.floor(Math.random() * max);
+			},
 			handleCallback(e) {
 				console.log('callback: ', e.detail)
 				modal.toast({
 					message: JSON.stringify(e.detail),
 					duration: 2,
 				});
+			},
+			// 随机切换文档
+			handleRandomChangeDoc() {
+				this.options = {
+					...this.options,
+					url: this.docList[this.getRandomInt(this.docList.length)]
+				};
 			}
 		}
 	};
