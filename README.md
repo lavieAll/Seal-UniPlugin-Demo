@@ -42,37 +42,9 @@
 
 <img src="http://silianpan.cn/upload/2022/01/01/Seal-UniPlugin-WeiXin-Me.jpg" width="240" style="width:240px;" />
 
-## 一、注意事项
-
-* ##### 本插件不需要其他任何配置，也不需要依赖其他任何库，不要在manifest.json->App模块配置中勾选Android X5 Webview`
-
-* ##### 不要同时使用其他同类文档预览插件，否则，可能会引起包冲突
-
-* ##### url或参数中是否含有中文字符串，请使用encodeURIComponent**或**encodeURI进行转码（新版可以不用转码，支持中文），详细说明见下面“问题一”
-
-## 二、问题解决
-
-### 问题一（新版可以不用转码，支持中文）：
-
-> 插件安装成功，但是文档预览失败。
-
-解决方案：检查文档url或参数中是否含有**中文字符串**，如果有，请使用**encodeURIComponent**或**encodeURI**进行转码。
-
-如果参数有http://链接，使用**encodeURIComponent**；如果要对整个url进行转码，使用**encodeURI**
-
-> encodeURIComponent和encodeURI区别
->
-> 它们都是编码URL，唯一区别就是编码的字符范围，其中
->
-> encodeURI方法***不会***对下列字符编码 **ASCII字母 数字 ~!@#$&\*()=:/,;?+'**
->
-> encodeURIComponent方法***不会***对下列字符编码 **ASCII字母 数字 ~!\*()'**
->
-> 所以encodeURIComponent比encodeURI编码的范围更大。
 
 
-
-## 三、快速上手
+## 一、快速上手
 
 Github克隆（[demo工程地址](https://github.com/silianpan/Seal-UniPlugin-Demo) ）或在右上角直接下载示例工程
 
@@ -85,7 +57,7 @@ Github克隆（[demo工程地址](https://github.com/silianpan/Seal-UniPlugin-De
 * 代码根目录下执行
 
   ```bash
-  npm install --registry https://registry.npm.taobao.org
+  npm install --registry https://registry.npmmirror.com
   ```
 
 ### Step2. 添加本文插件
@@ -123,7 +95,7 @@ const sealOfficeOnlineModule = uni.requireNativePlugin("Seal-OfficeOnline")
 * 选择自定义调试基座：然后“运行到手机或模拟器-》基座运行选择-》自定义调试基座”
 * 连接真机，运行到手机或模拟器-》运行到Android App基座，进行运行调试
 
-## 四、使用方法
+## 二、使用方法
 
 ### 0、插件首次初始化（在应用启动时进行调用）
 
@@ -519,7 +491,7 @@ sealOfficeOnlineModule.closeFile();
 
 
 
-## 五、openFile接口参数说明
+## 三、openFile接口参数说明
 
 支持打开在线文档，本地文档
 
@@ -566,7 +538,7 @@ sealOfficeOnlineModule.closeFile();
 
 
 
-## 六、openFileWPS接口参数说明
+## 四、openFileWPS接口参数说明
 
 本机WPS客户端预览或编辑文档
 
@@ -594,7 +566,7 @@ sealOfficeOnlineModule.closeFile();
 
 
 
-## 七、回调结果
+## 五、回调结果
 
 ### 1、回调结果格式
 
@@ -660,6 +632,7 @@ sealOfficeOnlineModule.closeFile();
 | 1013   | 正在加载ofd                 |
 | 1014   | 加载ofd完成                 |
 | 1015   | 文档下载进度                |
+| 1016   | 关闭对话框                  |
 |        |                             |
 | 1021   | WPS动作事件                 |
 
@@ -676,7 +649,7 @@ sealOfficeOnlineModule.closeFile();
 
 
 
-## 八、预览效果
+## 六、预览效果
 
 ### 1、Android
 
