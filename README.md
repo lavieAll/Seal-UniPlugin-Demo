@@ -38,9 +38,7 @@
 
 ### 原生Android项目离线集成，查看Demo工程及README文档： [Seal-Office-Android-Demo](https://github.com/silianpan/Seal-Office-Android-Demo)
 
-<span style="color:red">各位同学，对于插件使用还有疑问的，可以加QQ群（170683293）咨询，也可以扫下面二维码添加WX或者添加QQ（2480621579）。</span>
-
-<img src="http://silianpan.cn/upload/2022/01/01/Seal-UniPlugin-WeiXin-Me.jpg" width="240" style="width:240px;" />
+<span style="color:red">各位同学，对于插件使用还有疑问的，可以加QQ群（170683293）咨询，也可以添加QQ（2480621579）。</span>
 
 
 
@@ -67,8 +65,6 @@ Github克隆（[demo工程地址](https://github.com/silianpan/Seal-UniPlugin-De
 点击右上角`试用`或者`购买`，选择你的云打包插件
 
 ### Step3. 选择`manifest.json->App原生插件配置`中加载云端插件
-
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-lau3cirf3bhq53ac04/eb31ccf0-15dc-11eb-8ff1-d5dcf8779628.png" width="600" style="width:600px" />
 
 ### Step4. 使用插件
 
